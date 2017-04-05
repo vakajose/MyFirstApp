@@ -64,6 +64,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBEscuela.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EscuelaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EscuelaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EscuelaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EscuelaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +100,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBEscuela.cs</LastGenOutput>
       <DependentUpon>DBEscuela.edmx</DependentUpon>
+    </Content>
+    <Content Include="EscuelaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EscuelaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EscuelaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EscuelaModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
