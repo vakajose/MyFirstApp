@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBEscuela.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DBEscuelaStoreContainer">
+    <EntitySet Name="AlumnoSet" EntityType="DBEscuela.Store.AlumnoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CarreraSet" EntityType="DBEscuela.Store.CarreraSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CarreraAlumno" Association="DBEscuela.Store.CarreraAlumno">
+      <End Role="Carrera" EntitySet="CarreraSet" />
+      <End Role="Alumno" EntitySet="AlumnoSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AlumnoSet">
+    <Key>
+      <PropertyRef Name="iAlumnosId" />
+    </Key>
+    <Property Name="iAlumnosId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sNombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iGrado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="iCarreraId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Carrera_iCarreraId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarreraSet">
+    <Key>
+      <PropertyRef Name="iCarreraId" />
+    </Key>
+    <Property Name="iCarreraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sNombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CarreraAlumno">
+    <End Role="Carrera" Type="DBEscuela.Store.CarreraSet" Multiplicity="1" />
+    <End Role="Alumno" Type="DBEscuela.Store.AlumnoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrera">
+        <PropertyRef Name="iCarreraId" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="Carrera_iCarreraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DBEscuela" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DBEscuelaContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlumnoSet" EntityType="DBEscuela.Alumno" />
+          <EntitySet Name="CarreraSet" EntityType="DBEscuela.Carrera" />
+          <AssociationSet Name="CarreraAlumno" Association="DBEscuela.CarreraAlumno">
+            <End Role="Carrera" EntitySet="CarreraSet" />
+            <End Role="Alumno" EntitySet="AlumnoSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="iAlumnosId" />
+          </Key>
+          <Property Name="iAlumnosId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sNombre" Type="String" Nullable="false" />
+          <Property Name="iGrado" Type="String" Nullable="false" />
+          <Property Name="iCarreraId" Type="String" Nullable="false" />
+          <NavigationProperty Name="Carrera" Relationship="DBEscuela.CarreraAlumno" FromRole="Alumno" ToRole="Carrera" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="iCarreraId" />
+          </Key>
+          <Property Name="iCarreraId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sNombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="DBEscuela.CarreraAlumno" FromRole="Carrera" ToRole="Alumno" />
+        </EntityType>
+        <Association Name="CarreraAlumno">
+          <End Type="DBEscuela.Carrera" Role="Carrera" Multiplicity="1" />
+          <End Type="DBEscuela.Alumno" Role="Alumno" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBEscuelaStoreContainer" CdmEntityContainer="DBEscuelaContainer">
+    <EntitySetMapping Name="AlumnoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DBEscuela.Alumno)">
+        <MappingFragment StoreEntitySet="AlumnoSet">
+          <ScalarProperty Name="iAlumnosId" ColumnName="iAlumnosId" />
+          <ScalarProperty Name="sNombre" ColumnName="sNombre" />
+          <ScalarProperty Name="iGrado" ColumnName="iGrado" />
+          <ScalarProperty Name="iCarreraId" ColumnName="iCarreraId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarreraSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DBEscuela.Carrera)">
+        <MappingFragment StoreEntitySet="CarreraSet">
+          <ScalarProperty Name="iCarreraId" ColumnName="iCarreraId" />
+          <ScalarProperty Name="sNombre" ColumnName="sNombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CarreraAlumno" TypeName="DBEscuela.CarreraAlumno" StoreEntitySet="AlumnoSet">
+      <EndProperty Name="Carrera">
+        <ScalarProperty Name="iCarreraId" ColumnName="Carrera_iCarreraId" />
+      </EndProperty>
+      <EndProperty Name="Alumno">
+        <ScalarProperty Name="iAlumnosId" ColumnName="iAlumnosId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
