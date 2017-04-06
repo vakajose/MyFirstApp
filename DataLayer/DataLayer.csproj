@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alumno.cs">
+      <DependentUpon>EscuelaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carrera.cs">
+      <DependentUpon>EscuelaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DBEscuela.Context.cs">
       <AutoGen>True</AutoGen>
@@ -104,10 +110,12 @@
     <Content Include="EscuelaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EscuelaModel.Context.cs</LastGenOutput>
+      <DependentUpon>DBEscuela.edmx</DependentUpon>
     </Content>
     <Content Include="EscuelaModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EscuelaModel.cs</LastGenOutput>
+      <DependentUpon>DBEscuela.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
